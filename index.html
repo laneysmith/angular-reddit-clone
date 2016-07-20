@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html ng-app="redditClone">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Amiko|Roboto+Slab|Slabo+27px" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body ng-controller="MainController">
+     {{greeting}}
+
+     <div class="create-post">
+       <h3>Create a New Post</h3>
+       <form ng-submit="addPost()">
+         <label for="title">Title</label>
+         <input id="title" type="text" ng-model="formPost.title" placeholder="Title">
+         <label for="author">Author</label>
+         <input id="author" type="text" ng-model="formPost.author">
+         <label for="content">Description</label>
+         <input id="content" type="text" ng-model="formPost.content">
+         <label for="image">Image URL</label>
+         <input id="image" type="text" ng-model="formPost.image">
+         <input type="submit" value="Post">
+       </form>
+     </div>
+
+     <div class="post" ng-repeat="post in posts">
+       <div class="post-header">
+         <div class="post-title">
+           <span class="title">{{post.title}}</span>
+         </div>
+         <div class="post-arrows">
+           <span ng-class="{red: post.score < 0, green: post.score > 1}">{{post.score}}</span> &nbsp;
+           <i class="fa fa-arrow-circle-o-up fa-lg" ng-click="post.upvote()"></i>
+           <i class="fa fa-arrow-circle-o-down fa-lg" ng-click="post.downvote()"></i>
+         </div>
+       </div>
+       <p>{{post.content}}</p>
+       <div class="posted-by accent-text">
+         posted by {{post.author}} &nbsp; | &nbsp;
+         <span ng-click="showcomments=true">
+           <i class="fa fa-comment-o"></i> 4 Comments</span> &nbsp; | &nbsp;
+         <i class="fa fa-pencil-square-o"></i> Add Comment
+       </div>
+       <div ng-show="showcomments" class="post-comments animate-show">
+         <p class="accent-text" ng-click="showcomments=false">
+           <div class="collapse accent-text" ng-click="showcomments=false">
+             <span>
+               <i class="fa fa-chevron-up"></i>
+               Collapse Comments
+               <i class="fa fa-chevron-up"></i>
+             </span>
+           </div>
+         </p>
+         <p>
+           {{post.comments}}
+           <li ng-repeat"comment in post.comments">{{comment.author}}</li>
+         </p>
+      </div>
+     </div>
+
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+     <script src="app.js"></script>
+</body>
+</html>

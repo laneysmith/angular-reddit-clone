@@ -1,0 +1,91 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Amiko', sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.5rem;
+}
+
+.post {
+  background-color: #efefef;
+  padding: 1em;
+  border: 1px solid #dedede;
+  margin: 1.5em auto;
+}
+
+.title {
+  font-family: 'Slabo 27px', serif;
+  font-size: 2em;
+}
+
+.post-header {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.accent-text {
+  font-size: 0.65rem;
+  color: #707070;
+}
+
+.post-comments {
+}
+
+h3 {
+  font-family: 'Slabo 27px', serif;
+  font-size: 2em;
+}
+
+form {
+  margin: auto;
+  width: 500px;
+}
+
+input {
+  display: block;
+  padding: 0.5em;
+  margin-bottom: 1em;
+  width: 100%;
+}
+
+label {
+  font-weight: bold;
+}
+
+.animate-show {
+  transition: all linear 0.5s;
+}
+
+
+
+.collapse {
+  display: block;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  z-index: 1;}
+.collapse:before {
+  border-top: 1px dotted #707070;
+  content:"";
+  margin: 0 auto; /* this centers the line to the full width specified */
+  position: absolute; /* positioning must be absolute here, and relative positioning must be applied to the parent */
+  top: 50%; left: 0; right: 0; bottom: 0;
+  width: 100%;
+  z-index: -1;
+}
+.collapse span {
+  background: #efefef;
+  padding: 0 5px;
+}
+
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
+}
