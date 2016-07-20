@@ -11,56 +11,87 @@
 </head>
 <body ng-controller="MainController">
      {{greeting}}
-
-     <div class="create-post">
-       <h3>Create a New Post</h3>
-       <form ng-submit="addPost()">
-         <label for="title">Title</label>
-         <input id="title" type="text" ng-model="formPost.title" placeholder="Title">
-         <label for="author">Author</label>
-         <input id="author" type="text" ng-model="formPost.author">
-         <label for="content">Description</label>
-         <input id="content" type="text" ng-model="formPost.content">
-         <label for="image">Image URL</label>
-         <input id="image" type="text" ng-model="formPost.image">
-         <input type="submit" value="Post">
-       </form>
-     </div>
-
-     <div class="post" ng-repeat="post in posts">
-       <div class="post-header">
-         <div class="post-title">
-           <span class="title">{{post.title}}</span>
-         </div>
-         <div class="post-arrows">
-           <span ng-class="{red: post.score < 0, green: post.score > 1}">{{post.score}}</span> &nbsp;
-           <i class="fa fa-arrow-circle-o-up fa-lg" ng-click="post.upvote()"></i>
-           <i class="fa fa-arrow-circle-o-down fa-lg" ng-click="post.downvote()"></i>
-         </div>
+     <header>
+       <div>
+         <h1><a href="/">Reddit2.0</a></h1>
+         <i class="fa fa-plus"></i>&nbsp;<a href="#" ng-click="showcreatepost=true">Create Post</a>
        </div>
-       <p>{{post.content}}</p>
-       <div class="posted-by accent-text">
-         posted by {{post.author}} &nbsp; | &nbsp;
-         <span ng-click="showcomments=true">
-           <i class="fa fa-comment-o"></i> 4 Comments</span> &nbsp; | &nbsp;
-         <i class="fa fa-pencil-square-o"></i> Add Comment
+       <div>
+         <input id="search" ng-model="searchText" placeholder="Search All Posts">
        </div>
-       <div ng-show="showcomments" class="post-comments animate-show">
-         <p class="accent-text" ng-click="showcomments=false">
-           <div class="collapse accent-text" ng-click="showcomments=false">
-             <span>
-               <i class="fa fa-chevron-up"></i>
-               Collapse Comments
-               <i class="fa fa-chevron-up"></i>
-             </span>
+       <div>
+         <select ng-model="sortPostsBy">
+           <option value="" disabled>Sort Posts By...</option>
+           <option value="-score">Score (Highest)</option>
+           <option value="score">Score (Lowest)</option>
+           <option value="-date">Date (Newest)</option>
+           <option value="date">Date (Oldest)</option>
+           <option value="title">Title (A-Z)</option>
+           <option value="-title">Title (Z-A)</option>
+         </select>
+       </div>
+     </header>
+
+     <main>
+       <div class="create-post" ng-show="showcreatepost">
+         <form ng-submit="addPost()">
+           <h3>Create a New Post</h3>
+           <label for="title">Title</label>
+           <input id="title" type="text" ng-model="formPost.title" placeholder="Title">
+           <label for="author">Author</label>
+           <input id="author" type="text" ng-model="formPost.author" placeholder="Author">
+           <label for="content">Description</label>
+           <input id="content" type="text" ng-model="formPost.content" placeholder="Description">
+           <label for="image">Image URL</label>
+           <input id="image" type="text" ng-model="formPost.image" placeholder="http://">
+           <input type="submit" value="Post" ng-click="showcreatepost=false">
+         </form>
+       </div>
+
+       <div class="post" ng-repeat="post in posts | orderBy:sortPostsBy | filter:searchText">
+         <div class="post-header">
+           <div class="post-title">
+             <span class="title">{{post.title}}</span>
            </div>
-         </p>
-         <p>
-           {{post.comments}}
-           <li ng-repeat"comment in post.comments">{{comment.author}}</li>
-         </p>
-      </div>
-     </div>
+           <div class="post-arrows">
+             <span ng-class="{red: post.score < 0, green: post.score > 1}">{{post.score}}</span> &nbsp;
+             <i class="fa fa-arrow-circle-o-up fa-lg" ng-click="post.upvote()"></i>
+             <i class="fa fa-arrow-circle-o-down fa-lg" ng-click="post.downvote()"></i>
+           </div>
+         </div>
+         <p>{{post.content}}</p>
+         <div class="post-footer accent-text">
+           posted by {{post.author}} on {{post.date | date:'EEE, MMM d, y h:mm:ss a'}}
+           <div>
+             <i class="fa fa-comment-o"></i> <a href="" ng-click="showcomments=true">{{post.comments.length}} Comment<span ng-hide="post.comments.length == 1">s</span></a> &nbsp; | &nbsp;
+             <i class="fa fa-pencil-square-o"></i> <a href="" ng-click="showcomments=true">Add Comment</a>
+           </div>
+         </div>
+
+         <div ng-show="showcomments" class="post-comments animate-show">
+           <p class="accent-text" ng-click="showcomments=false">
+             <div class="collapse accent-text" ng-click="showcomments=false">
+               <span>
+                 <i class="fa fa-chevron-up"></i>
+                 <a href="">Collapse Comments</a>
+                 <i class="fa fa-chevron-up"></i>
+               </span>
+             </div>
+           </p>
+           <p>
+             <p ng-repeat="comment in post.comments | orderBy:'comment.date'"><b>{{comment.author}}</b>: {{comment.content}}<br> <span class="accent-text">posted on {{comment.date | date:'EEE, MMM d, y h:mm:ss a'}}</span></p>
+           </p>
+           <h3>Add a Comment</h3>
+           <form ng-submit="addComment()">
+             <label for="author">Name</label>
+             <input id="author" type="text" ng-model="formComment.author" placeholder="Name">
+             <label for="content">Comment</label>
+             <input id="content" type="text" ng-model="formComment.content" placeholder="Comment">
+             <input type="submit" value="Post Comment">
+           </form>
+        </div>
+       </div>
+    </main>
 
      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
      <script src="app.js"></script>

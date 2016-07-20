@@ -1,11 +1,35 @@
 * {
   box-sizing: border-box;
+  /*outline: 1px solid red;*/
+}
+
+a {
+  color: #404040;
+}
+
+a:hover {
+  text-decoration: none;
 }
 
 body {
+  margin: 0;
+  padding: 0;
   font-family: 'Amiko', sans-serif;
   font-size: 0.8rem;
   line-height: 1.5rem;
+  color: #404040;
+}
+
+header {
+  background-color: #efefef;
+  padding: 1em;
+  border-bottom: 1px solid #dedede;
+  display: flex;
+  align-items: center;
+}
+
+main {
+  margin: 1rem;
 }
 
 .post {
@@ -15,16 +39,41 @@ body {
   margin: 1.5em auto;
 }
 
+.create-post {
+  margin-bottom: 2rem;
+}
+
 .title {
   font-family: 'Slabo 27px', serif;
   font-size: 2em;
 }
 
-.post-header {
+header, .post-header, .post-footer {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
+}
+
+@media (max-width: 600px) {
+  header, .post-header, .post-footer {
+    display: flex;
+    flex-direction: column;;
+    /*align-items: flex-start;
+    justify-content: space-between;*/
+  }
+  form {
+    margin: auto;
+    width: 100%;
+  }
+}
+
+.accent-text a {
+  text-decoration: underline;
+  color: #707070;
+}
+.accent-text a:hover {
+  text-decoration: none;
 }
 
 .accent-text {
@@ -35,14 +84,31 @@ body {
 .post-comments {
 }
 
-h3 {
+h1, h1 a {
+  display: inline;
+  font-family: 'Slabo 27px', serif;
+  font-size: 1.5rem;
+  margin: 0 0.5rem 0 0;
+  padding: 0;
+  color: #404040;
+  text-shadow: 1px 1px #FFF;
+  text-decoration: none;
+}
+
+h2 {
   font-family: 'Slabo 27px', serif;
   font-size: 2em;
+  text-shadow: 1px 1px #FFF;
+}
+
+h3 {
+  font-family: 'Slabo 27px', serif;
+  font-size: 1.5em;
 }
 
 form {
   margin: auto;
-  width: 500px;
+  max-width: 400px;
 }
 
 input {
@@ -88,4 +154,10 @@ label {
 
 .green {
   color: green;
+}
+
+#search {
+  display: inline-block;
+  width: 10rem;
+  margin: 0;
 }
