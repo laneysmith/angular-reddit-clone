@@ -1,27 +1,34 @@
 var app = angular.module('redditClone', []);
 
 app.controller('MainController', ['$scope', function($scope) {
-  $scope.sortPostsBy = '-score'
-  $scope.Comment = function() {
-    this.author = '',
-    this.content = '',
-    this.date = new Date()
-  };
+  $scope.sortPostsBy = '-score'; // default post sort
+  // toggle create post form
+  $scope.showcreatepost = false;
+  $scope.toggleCreatePost = function() {
+    if (this.showcreatepost === true) {
+      this.showcreatepost = false;
+    } else {
+      this.showcreatepost = true;
+    }
+  }
+  // post builder
 	$scope.Post = function() {
-		this.title = '',
-			this.author = '',
-			this.image = '',
-			this.content = '',
-			this.date = new Date(),
-			this.score = 0,
-			this.upvote = function() {
-				this.score += 1
-			},
-			this.downvote = function() {
-				this.score -= 1
-			},
-			this.comments = []
+		this.date = new Date(),
+		this.score = 0,
+		this.upvote = function() {
+			this.score += 1
+		},
+		this.downvote = function() {
+			this.score -= 1
+		},
+		this.comments = [],
+    this.addComment = function() {
+      var newComment = this.formComment;
+      newComment.date = new Date();
+      this.comments.push(newComment);
+    }
 	}
+  // seed page with sample posts
 	$scope.posts = [{
 		'title': 'Quail Watching 101',
 		'author': 'Bradford',
@@ -37,13 +44,18 @@ app.controller('MainController', ['$scope', function($scope) {
 		},
 		'comments': [{
 			'author': 'Ned',
-			'comment': 'This post is dumb.',
+			'content': 'This post is dumb.',
 			'date': new Date()
 		}, {
 			'author': 'Lucas',
-			'comment': 'This post is dumber.',
+			'content': 'This post is dumber.',
 			'date': new Date()
-		}]
+		}],
+    'addComment': function() {
+      var newComment = this.formComment;
+      newComment.date = new Date();
+      this.comments.push(newComment);
+    }
 	}, {
 		'title': 'How to Keep it Wonhunnit',
 		'author': 'Bennett',
@@ -59,9 +71,14 @@ app.controller('MainController', ['$scope', function($scope) {
 		},
 		'comments': [{
 			'author': 'Amanda',
-			'comment': 'What\'s up!',
+			'content': 'What\'s up!',
 			'date': new Date()
-		}]
+		}],
+    'addComment': function() {
+      var newComment = this.formComment;
+      newComment.date = new Date();
+      this.comments.push(newComment);
+    }
 	}, {
 		'title': 'My Shark Friends',
 		'author': 'Daniel',
@@ -75,22 +92,23 @@ app.controller('MainController', ['$scope', function($scope) {
 		'downvote': function() {
 			this.score -= 1
 		},
-		'comments': []
+		'comments': [],
+    'addComment': function() {
+      var newComment = this.formComment;
+      newComment.date = new Date();
+      this.comments.push(newComment);
+    }
 	}];
+  // create new post
 	$scope.addPost = function() {
 		var newPost = new this.Post();
-		newPost.title = this.formPost.title
-		newPost.author = this.formPost.author
-		newPost.content = this.formPost.content
-		newPost.image = this.formPost.image
-		$scope.posts.push(newPost)
+		newPost.title = this.formPost.title;
+		newPost.author = this.formPost.author;
+		newPost.content = this.formPost.content;
+		newPost.image = this.formPost.image;
+		$scope.posts.push(newPost);
+    $scope.formPostName = angular.copy($scope.originForm);
+    $scope.formPost.$setPristine();
+    // $scope.showcreatepost = false;
 	};
-  $scope.addComment = function() {
-    console.log('in');
-    var newComment = new $scope.Comment();
-    newComment.author = this.formComment.author;
-    newComment.content = this.formComment.content;
-    console.log(newComment);
-    $scope.posts[this.$index].comments.push(newComment);
-  }
 }]);
