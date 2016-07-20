@@ -49,47 +49,50 @@
        </div>
 
        <div class="post" ng-repeat="post in posts | orderBy:sortPostsBy | filter:searchText">
-         <div class="post-header">
-           <div class="post-title">
-             <span class="title">{{post.title}}</span>
-           </div>
-           <div class="post-arrows">
-             <span ng-class="{red: post.score < 0, green: post.score > 1}">{{post.score}}</span> &nbsp;
-             <i class="fa fa-arrow-circle-o-up fa-lg" ng-click="post.upvote()"></i>
-             <i class="fa fa-arrow-circle-o-down fa-lg" ng-click="post.downvote()"></i>
-           </div>
-         </div>
-         <p>{{post.content}}</p>
-         <div class="post-footer accent-text">
-           posted by {{post.author}} on {{post.date | date:'EEE, MMM d, y h:mm:ss a'}}
-           <div>
-             <i class="fa fa-comment-o"></i> <a href="" ng-click="showcomments=true">{{post.comments.length}} Comment<span ng-hide="post.comments.length == 1">s</span></a> &nbsp; | &nbsp;
-             <i class="fa fa-pencil-square-o"></i> <a href="" ng-click="showcomments=true">Add Comment</a>
-           </div>
-         </div>
-
-         <div ng-show="showcomments" class="post-comments animate-show">
-           <p class="accent-text" ng-click="showcomments=false">
-             <div class="collapse accent-text" ng-click="showcomments=false">
-               <span>
-                 <i class="fa fa-chevron-up"></i>
-                 <a href="">Collapse Comments</a>
-                 <i class="fa fa-chevron-up"></i>
-               </span>
+         <div class="post-image" style="background-image: url('{{post.image}}');"></div>
+         <div class="post-content">
+           <div class="post-header">
+             <div class="post-title">
+               <span class="title">{{post.title}}</span>
              </div>
-           </p>
-           <p>
-             <p ng-repeat="comment in post.comments | orderBy:'comment.date'"><b>{{comment.author}}</b>: {{comment.content}}<br> <span class="accent-text">posted on {{comment.date | date:'EEE, MMM d, y h:mm:ss a'}}</span></p>
-           </p>
-           <h3>Add a Comment</h3>
-           <form ng-submit="addComment()">
-             <label for="author">Name</label>
-             <input id="author" type="text" ng-model="formComment.author" placeholder="Name">
-             <label for="content">Comment</label>
-             <input id="content" type="text" ng-model="formComment.content" placeholder="Comment">
-             <input type="submit" value="Post Comment">
-           </form>
-        </div>
+             <div class="post-arrows">
+               <span ng-class="{red: post.score < 0, green: post.score > 1}">{{post.score}}</span> &nbsp;
+               <i class="fa fa-arrow-circle-o-up fa-lg" ng-click="post.upvote()"></i>
+               <i class="fa fa-arrow-circle-o-down fa-lg" ng-click="post.downvote()"></i>
+             </div>
+           </div>
+           <p>{{post.content}}</p>
+           <div class="post-footer accent-text">
+             posted by {{post.author}} on {{post.date | date:'EEE, MMM d, y h:mm:ss a'}}
+             <div>
+               <i class="fa fa-comment-o"></i> <a href="" ng-click="showcomments=true">{{post.comments.length}} Comment<span ng-hide="post.comments.length == 1">s</span></a> &nbsp; | &nbsp;
+               <i class="fa fa-pencil-square-o"></i> <a href="" ng-click="showcomments=true">Add Comment</a>
+             </div>
+           </div>
+
+           <div ng-show="showcomments" class="post-comments animate-show">
+             <p class="accent-text" ng-click="showcomments=false">
+               <div class="collapse accent-text" ng-click="showcomments=false">
+                 <span>
+                   <i class="fa fa-chevron-up"></i>
+                   <a href="">Collapse Comments</a>
+                   <i class="fa fa-chevron-up"></i>
+                 </span>
+               </div>
+             </p>
+             <p>
+               <p ng-repeat="comment in post.comments | orderBy:'comment.date'"><b>{{comment.author}}</b>: {{comment.content}}<br> <span class="accent-text">posted on {{comment.date | date:'EEE, MMM d, y h:mm:ss a'}}</span></p>
+             </p>
+             <h3>Add a Comment</h3>
+             <form ng-submit="addComment()">
+               <label for="author">Name</label>
+               <input id="author" type="text" ng-model="formComment.author" placeholder="Name">
+               <label for="content">Comment</label>
+               <input id="content" type="text" ng-model="formComment.content" placeholder="Comment">
+               <input type="submit" value="Post Comment">
+             </form>
+          </div>
+         </div>
        </div>
     </main>
 

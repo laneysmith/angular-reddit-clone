@@ -37,6 +37,26 @@ main {
   padding: 1em;
   border: 1px solid #dedede;
   margin: 1.5em auto;
+  display: flex;
+  flex-direction: row;
+}
+
+/*.post-image img {
+  width: 100px;
+}*/
+
+.post-image {
+  width: 100px;
+  height: 100px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-right: 1rem;
+  border: 1px solid #dedede;
+}
+
+.post-content {
+  flex: 1;
 }
 
 .create-post {
@@ -55,16 +75,24 @@ header, .post-header, .post-footer {
   justify-content: space-between;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 650px) {
   header, .post-header, .post-footer {
     display: flex;
-    flex-direction: column;;
+    flex-direction: column;
     /*align-items: flex-start;
     justify-content: space-between;*/
   }
   form {
     margin: auto;
     width: 100%;
+  }
+  .post {
+    flex-direction: column;
+  }
+  .post-image {
+    width: 100%;
+    height: 200px;
+    margin: 0 0 1rem 0;
   }
 }
 

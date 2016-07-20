@@ -1,6 +1,7 @@
 var app = angular.module('redditClone', []);
 
 app.controller('MainController', ['$scope', function($scope) {
+  $scope.sortPostsBy = '-score'
   $scope.Comment = function() {
     this.author = '',
     this.content = '',
@@ -20,19 +21,11 @@ app.controller('MainController', ['$scope', function($scope) {
 				this.score -= 1
 			},
 			this.comments = []
-      // this.addComment = function() {
-      //   console.log('in');
-      //   var newComment = new $scope.Comment();
-      //   newComment.author = this.formComment.author;
-      //   newComment.content = this.formComment.content;
-      //   console.log(newComment);
-      //   this.comments.push(newComment);
-      // }
 	}
 	$scope.posts = [{
 		'title': 'Quail Watching 101',
 		'author': 'Bradford',
-		'image': '',
+		'image': 'https://upload.wikimedia.org/wikipedia/commons/a/aa/California_quail.jpg',
 		'content': 'I like quails.',
 		'date': new Date(),
 		'score': 5,
@@ -54,10 +47,10 @@ app.controller('MainController', ['$scope', function($scope) {
 	}, {
 		'title': 'How to Keep it Wonhunnit',
 		'author': 'Bennett',
-		'image': '',
+		'image': 'https://upload.wikimedia.org/wikipedia/commons/4/4d/Usdollar100front.jpg',
 		'content': 'Be Bennett.',
 		'date': new Date(),
-		'score': -3,
+		'score': 23,
 		'upvote': function() {
 			this.score += 1
 		},
@@ -72,7 +65,7 @@ app.controller('MainController', ['$scope', function($scope) {
 	}, {
 		'title': 'My Shark Friends',
 		'author': 'Daniel',
-		'image': '',
+		'image': 'http://i.telegraph.co.uk/multimedia/archive/03575/shark_3575581b.jpg',
 		'content': 'Here\'s a list of my favorite sharks: hammerhead, great white, tiger shark, baby shark, mama shark, adolescent shark, happy shark, ambivalent shark, careful shark, mako shark, girl shark, thresher shark, goblin shark.',
 		'date': new Date(),
 		'score': -27,
