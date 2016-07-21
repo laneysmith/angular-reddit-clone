@@ -1,6 +1,5 @@
 * {
   box-sizing: border-box;
-  outline: ;
 }
 
 a {
@@ -39,8 +38,14 @@ main {
   border: 1px solid #dedede;
   margin: 1.5em auto;
   display: flex;
+  flex-direction: column;
+}
+
+.post-detail {
+  display: flex;
   flex-direction: row;
 }
+
 
 .post-image {
   width: 100px;
@@ -73,7 +78,7 @@ header, .post-header, .post-footer {
 }
 
 @media (max-width: 650px) {
-  .post-header, .post-footer {
+  .post-header, .post-footer, .post-detail {
     display: flex;
     flex-direction: column;
     /*align-items: flex-start;

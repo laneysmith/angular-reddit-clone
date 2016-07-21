@@ -13,7 +13,7 @@
      <header>
        <div>
          <h1><a href="/">Reddit2.0</a></h1>
-         <i class="fa fa-plus"></i><a href="" ng-click="toggleCreatePost()">Create Post</a>
+         <i class="fa fa-plus"></i>&nbsp;<a href="" ng-click="toggleCreatePost()">Create Post</a>
        </div>
        <div>
          <input id="search" ng-model="searchText" placeholder="Search All Posts">
@@ -50,6 +50,7 @@
        </div>
 
        <div class="post" ng-repeat="post in posts | orderBy:sortPostsBy | filter:searchText">
+         <div class="post-detail">
          <div class="post-image" style="background-image: url('{{post.image}}');"></div>
          <div class="post-content">
            <div class="post-header">
@@ -57,7 +58,7 @@
                <span class="title">{{post.title}}</span>
              </div>
              <div class="post-arrows">
-               <span ng-class="{red: post.score < 0, green: post.score > 1}">{{post.score}}</span> &nbsp;
+               <span ng-class="{red: post.score < 0, green: post.score >= 1}">{{post.score}}</span> &nbsp;
                <i class="fa fa-arrow-circle-o-up fa-lg" ng-click="post.upvote()"></i>
                <i class="fa fa-arrow-circle-o-down fa-lg" ng-click="post.downvote()"></i>
              </div>
@@ -70,6 +71,8 @@
                <i class="fa fa-pencil-square-o"></i> <a href="" ng-click="showcomments=true">Add Comment</a>
              </div>
            </div>
+         </div>
+       </div>
 
            <div ng-show="showcomments" class="post-comments animate-show">
              <p class="accent-text" ng-click="showcomments=false">
@@ -93,11 +96,12 @@
                <input type="submit" value="Post Comment">
              </form>
           </div>
-         </div>
        </div>
     </main>
 
      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
-     <script src="app.js"></script>
+     <script src="/js/app.js"></script>
+     <script src="/js/data.js"></script>
+     <script src="/js/controllers.js"></script>
 </body>
 </html>
