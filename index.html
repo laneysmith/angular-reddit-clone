@@ -13,7 +13,7 @@
      <header>
        <div>
          <h1><a href="/">Reddit2.0</a></h1>
-         <a href="" ng-click="toggleCreatePost()" class="btn"><i class="fa fa-plus"></i> Create Post</a>
+         <i class="fa fa-plus"></i><a href="" ng-click="toggleCreatePost()">Create Post</a>
        </div>
        <div>
          <input id="search" ng-model="searchText" placeholder="Search All Posts">
@@ -31,19 +31,22 @@
 
      <main>
        <div class="create-post" ng-show="showcreatepost">
-         <form name="formPostName" ng-submit="addPost()" novalidate>
+         <form name="formPost" ng-submit="addPost()" novalidate>
            <h3>Create a New Post</h3>
            <label for="title">Title</label>
            <input id="title" type="text" ng-model="formPost.title" placeholder="Title" required>
-           <label for="author">Author</label>
-           <input id="author" type="text" ng-model="formPost.author" placeholder="Author" ng-minlength="3" required>
+           <label for="author1">Author</label>
+           <input id="author1" type="text" ng-model="formPost.author" placeholder="Author" ng-minlength="3" name="author_name" ng-class="{ 'red-border' : formPost.author_name.$invalid && !formPost.author_name.$pristine }" required>
            <label for="content">Description</label>
            <input id="content" type="text" ng-model="formPost.content" placeholder="Description" required>
            <label for="image">Image URL</label>
-           <input id="image" type="url" ng-model="formPost.image" placeholder="http://" required>
+           <input id="image" type="url" ng-model="formPost.image" name="image_url" ng-class="{ 'red-border' : formPost.image_url.$invalid && !formPost.image_url.$pristine }" placeholder="http://" required>
            <input type="submit" value="Post">
+           <p class="form-error" ng-show="formPost.$invalid && !formPost.author_name.$pristine">
+             <span ng-show="formPost.author_name.$invalid && !formPost.author_name.$pristine">Author name must be at least 3 characters.<br></span>
+             <span ng-show="formPost.image_url.$invalid && !formPost.image_url.$pristine">Please enter a valid image URL.</span>
+           </p>
          </form>
-         <p ng-show="formPostNa"></p>
        </div>
 
        <div class="post" ng-repeat="post in posts | orderBy:sortPostsBy | filter:searchText">
@@ -51,7 +54,7 @@
          <div class="post-content">
            <div class="post-header">
              <div class="post-title">
-               <span class="title">{{$index}} {{post.title}}</span>
+               <span class="title">{{post.title}}</span>
              </div>
              <div class="post-arrows">
                <span ng-class="{red: post.score < 0, green: post.score > 1}">{{post.score}}</span> &nbsp;
@@ -79,7 +82,7 @@
                </div>
              </p>
              <p>
-               <p ng-repeat="comment in post.comments | orderBy:'comment.date'"><b>{{comment.author}}</b>: {{comment.content}}<br> <span class="accent-text">posted on {{comment.date | date:'EEE, MMM d, y h:mm:ss a'}}</span></p>
+               <p ng-repeat="comment in post.comments | orderBy:'-date'"><b>{{comment.author}}</b>: {{comment.content}}<br> <span class="accent-text">posted on {{comment.date | date:'EEE, MMM d, y h:mm:ss a'}}</span></p>
              </p>
              <h3>Add a Comment</h3>
              <form name="post.formComment" ng-submit="post.addComment()">

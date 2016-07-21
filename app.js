@@ -2,7 +2,7 @@ var app = angular.module('redditClone', []);
 
 app.controller('MainController', ['$scope', function($scope) {
   $scope.sortPostsBy = '-score'; // default post sort
-  // toggle create post form
+  // toggle new post form
   $scope.showcreatepost = false;
   $scope.toggleCreatePost = function() {
     if (this.showcreatepost === true) {
@@ -23,9 +23,13 @@ app.controller('MainController', ['$scope', function($scope) {
 		},
 		this.comments = [],
     this.addComment = function() {
-      var newComment = this.formComment;
+      var newComment = {};
+      newComment.author = this.formComment.author;
+      newComment.content = this.formComment.content;
       newComment.date = new Date();
       this.comments.push(newComment);
+      this.formComment.author = '';
+      this.formComment.content = '';
     }
 	}
   // seed page with sample posts
@@ -35,7 +39,7 @@ app.controller('MainController', ['$scope', function($scope) {
 		'image': 'https://upload.wikimedia.org/wikipedia/commons/a/aa/California_quail.jpg',
 		'content': 'I like quails.',
 		'date': new Date(),
-		'score': 5,
+		'score': 2,
 		'upvote': function() {
 			this.score += 1
 		},
@@ -52,7 +56,9 @@ app.controller('MainController', ['$scope', function($scope) {
 			'date': new Date()
 		}],
     'addComment': function() {
-      var newComment = this.formComment;
+      var newComment = {};
+      newComment.author = this.formComment.author;
+      newComment.content = this.formComment.content;
       newComment.date = new Date();
       this.comments.push(newComment);
     }
@@ -62,7 +68,7 @@ app.controller('MainController', ['$scope', function($scope) {
 		'image': 'https://upload.wikimedia.org/wikipedia/commons/4/4d/Usdollar100front.jpg',
 		'content': 'Be Bennett.',
 		'date': new Date(),
-		'score': 23,
+		'score': 8,
 		'upvote': function() {
 			this.score += 1
 		},
@@ -75,7 +81,9 @@ app.controller('MainController', ['$scope', function($scope) {
 			'date': new Date()
 		}],
     'addComment': function() {
-      var newComment = this.formComment;
+      var newComment = {};
+      newComment.author = this.formComment.author;
+      newComment.content = this.formComment.content;
       newComment.date = new Date();
       this.comments.push(newComment);
     }
@@ -94,7 +102,9 @@ app.controller('MainController', ['$scope', function($scope) {
 		},
 		'comments': [],
     'addComment': function() {
-      var newComment = this.formComment;
+      var newComment = {};
+      newComment.author = this.formComment.author;
+      newComment.content = this.formComment.content;
       newComment.date = new Date();
       this.comments.push(newComment);
     }
@@ -106,9 +116,7 @@ app.controller('MainController', ['$scope', function($scope) {
 		newPost.author = this.formPost.author;
 		newPost.content = this.formPost.content;
 		newPost.image = this.formPost.image;
+    $scope.showcreatepost = false;
 		$scope.posts.push(newPost);
-    $scope.formPostName = angular.copy($scope.originForm);
-    $scope.formPost.$setPristine();
-    // $scope.showcreatepost = false;
 	};
 }]);
