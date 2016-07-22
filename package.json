@@ -1,0 +1,26 @@
+{
+  "name": "angular-reddit-clone",
+  "version": "1.0.0",
+  "description": "Assignment: use AngularJS to create a Reddit-like website that allows you to create posts & comments, sort posts in various ways, & search all posts",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/laneysmith/angular-reddit-clone.git"
+  },
+  "keywords": [
+    "angularjs"
+  ],
+  "author": "Laney Smith",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/laneysmith/angular-reddit-clone/issues"
+  },
+  "homepage": "https://github.com/laneysmith/angular-reddit-clone#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
