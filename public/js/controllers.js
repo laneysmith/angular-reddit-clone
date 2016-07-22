@@ -41,5 +41,7 @@ app.controller('MainController', ['$scope', function($scope) {
     console.log(newPost);
 		$scope.showcreatepost = false;
 		$scope.posts.push(newPost);
+		$scope.formPost = {};
+		$scope.formPost.$setPristine();
 	};
 }]);
