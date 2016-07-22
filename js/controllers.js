@@ -2,7 +2,7 @@ app.controller('MainController', ['$scope', function($scope) {
 	$scope.sortPostsBy = '-score'; // set default post sort
 	$scope.posts = postData; // sample posts stored in data.js
 	// toggle new post form
-	$scope.showcreatepost = false;
+	// $scope.showcreatepost = false;
 	$scope.toggleCreatePost = function() {
 		if (this.showcreatepost === true) {
 			this.showcreatepost = false;
@@ -12,6 +12,10 @@ app.controller('MainController', ['$scope', function($scope) {
 	}
 	// post builder
 	$scope.Post = function() {
+    this.title = $scope.formPost.title;
+    this.author = $scope.formPost.author;
+    this.content = $scope.formPost.content;
+    this.image = $scope.formPost.image;
 		this.date = new Date(),
 		this.score = 0,
 		this.upvote = function() {
@@ -31,13 +35,10 @@ app.controller('MainController', ['$scope', function($scope) {
 			this.formComment.content = '';
 			}
 		}
-	// create new post
+	// create new postv
 	$scope.addPost = function() {
-		var newPost = new this.Post();
-		newPost.title = this.formPost.title;
-		newPost.author = this.formPost.author;
-		newPost.content = this.formPost.content;
-		newPost.image = this.formPost.image;
+		var newPost = new $scope.Post();
+    console.log(newPost);
 		$scope.showcreatepost = false;
 		$scope.posts.push(newPost);
 	};

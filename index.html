@@ -42,10 +42,8 @@
            <label for="image">Image URL</label>
            <input id="image" type="url" ng-model="formPost.image" name="image_url" ng-class="{ 'red-border' : formPost.image_url.$invalid && !formPost.image_url.$pristine }" placeholder="http://" required>
            <input type="submit" value="Post">
-           <p class="form-error" ng-show="formPost.$invalid && !formPost.author_name.$pristine">
-             <span ng-show="formPost.author_name.$invalid && !formPost.author_name.$pristine">Author name must be at least 3 characters.<br></span>
-             <span ng-show="formPost.image_url.$invalid && !formPost.image_url.$pristine">Please enter a valid image URL.</span>
-           </p>
+             <p class="form-error" ng-show="formPost.author_name.$invalid && !formPost.author_name.$pristine">Author name must be at least 3 characters.</p>
+             <p class="form-error" ng-show="formPost.image_url.$invalid && !formPost.image_url.$pristine">Please enter a valid image URL.</p>
          </form>
        </div>
 
