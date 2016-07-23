@@ -18,7 +18,7 @@
        <div>
          <input id="search" ng-model="searchText" placeholder="Search All Posts">
        </div>
-       <select ng-model="sortPostsBy" id="order">
+       <select ng-model="sortPostsBy">
          <option value="" disabled>Sort Posts By...</option>
          <option value="-score">Score (Highest)</option>
          <option value="score">Score (Lowest)</option>
@@ -57,8 +57,8 @@
              </div>
              <div class="post-arrows">
                <span ng-class="{red: post.score < 0, green: post.score >= 1}">{{post.score}}</span> &nbsp;
-               <i class="fa fa-arrow-circle-o-up fa-lg" ng-click="post.upvote()"></i>
-               <i class="fa fa-arrow-circle-o-down fa-lg" ng-click="post.downvote()"></i>
+               <i class="fa fa-arrow-circle-o-up fa-lg" ng-click="upvote()"></i>
+               <i class="fa fa-arrow-circle-o-down fa-lg" ng-click="downvote()"></i>
              </div>
            </div>
            <p>{{post.content}}</p>
@@ -86,7 +86,7 @@
                <p ng-repeat="comment in post.comments | orderBy:'-date'"><b>{{comment.author}}</b>: {{comment.content}}<br> <span class="accent-text">posted on {{comment.date | date:'EEE, MMM d, y h:mm:ss a'}}</span></p>
              </p>
              <h3>Add a Comment</h3>
-             <form name="post.formComment" ng-submit="post.addComment()">
+             <form name="post.formComment" ng-submit="addComment()">
                <label for="commentauthor">Name</label>
                <input id="commentauthor" type="text" ng-model="post.formComment.author" placeholder="Name" required>
                <label for="commentcontent">Comment</label>

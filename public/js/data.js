@@ -6,12 +6,6 @@ var postData = [{
   'content': 'I like quails.',
   'date': new Date(),
   'score': 2,
-  'upvote': function() {
-    this.score += 1
-  },
-  'downvote': function() {
-    this.score -= 1
-  },
   'comments': [{
     'author': 'Ned',
     'content': 'This post is dumb.',
@@ -20,14 +14,7 @@ var postData = [{
     'author': 'Lucas',
     'content': 'This post is dumber.',
     'date': new Date()
-  }],
-  'addComment': function() {
-    var newComment = {};
-    newComment.author = this.formComment.author;
-    newComment.content = this.formComment.content;
-    newComment.date = new Date();
-    this.comments.push(newComment);
-  }
+  }]
 }, {
   'title': 'How to Keep it Wonhunnit',
   'author': 'Bennett',
@@ -35,24 +22,11 @@ var postData = [{
   'content': 'Be Bennett.',
   'date': new Date(),
   'score': 8,
-  'upvote': function() {
-    this.score += 1
-  },
-  'downvote': function() {
-    this.score -= 1
-  },
   'comments': [{
     'author': 'Amanda',
     'content': 'What\'s up!',
     'date': new Date()
-  }],
-  'addComment': function() {
-    var newComment = {};
-    newComment.author = this.formComment.author;
-    newComment.content = this.formComment.content;
-    newComment.date = new Date();
-    this.comments.push(newComment);
-  }
+  }]
 }, {
   'title': 'My Shark Friends',
   'author': 'Daniel',
@@ -60,18 +34,5 @@ var postData = [{
   'content': 'Here\'s a list of my favorite sharks: hammerhead, great white, tiger shark, baby shark, mama shark, adolescent shark, happy shark, ambivalent shark, careful shark, mako shark, girl shark, thresher shark, goblin shark.',
   'date': new Date(),
   'score': -27,
-  'upvote': function() {
-    this.score += 1
-  },
-  'downvote': function() {
-    this.score -= 1
-  },
-  'comments': [],
-  'addComment': function() {
-    var newComment = {};
-    newComment.author = this.formComment.author;
-    newComment.content = this.formComment.content;
-    newComment.date = new Date();
-    this.comments.push(newComment);
-  }
+  'comments': []
 }];
